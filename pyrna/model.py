@@ -282,7 +282,7 @@ class Guanine3D(Residue3D):
 
 class Adenine3D(Residue3D):
     def __init__(self):
-        Reisidue3D.__init__(self)
+        Residue3D.__init__(self)
     def add_atom(self, atom_name, coords):
         match atom_name:
             case "N1": self.atoms.append(AcceptorEndoA(atom_name, coords[0], coords[1], coords[2]))
