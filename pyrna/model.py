@@ -243,7 +243,7 @@ class ExocyclicA:
     def __init__(self, name, x, y, z):
         Atom.__init__(self, name, x, y, z)
 
-class DonnorExoA: 
+class DonorExoA: 
     def __init__(self, name, x, y, z):
         ExocyclicA.__init__(self, name, x, y, z)
 
@@ -275,14 +275,13 @@ class Guanine3D(Residue3D):
     def add_atom(self, atom_name, coords):
         match atom_name:    
             case "N1": self.atoms.append(DonorEndoA(atom_name, coords[0], coords[1], coords[2]))
-            case "N2": self.atoms.append(DonorExoA(atom name, coords[0], coords[1], coords[2]))
+            case "N2": self.atoms.append(DonorExoA(atom_name, coords[0], coords[1], coords[2]))
             case "N3": self.atoms.append(AcceptorEndoA(atom_name, coords[0], coords[1], coords[2]))
             case "06": self.atoms.append(AcceptorExoA(atom_name, coords[0], coords[1], coords[2]))
             case "N7": self.atoms.append(AcceptorEndoA(atom_name, coords[0], coords[1], coords[2]))
             case _: self.atoms.append(Atom(atom_name, coords[0], coords[1], coords[2]))
 
 class TertiaryStructure:
-
     def __init__(self, rna):
         self.rna = rna
         self.name = "N.A."
