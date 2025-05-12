@@ -297,7 +297,7 @@ class Cytosine3D(Residue3D):
     def add_atom(self, atom_name, coords):
         match atom_name:
             case "N4": self.atoms.append(DonorExoA(atom_name, coords[0], coords[1], coords[2]))
-            case "N3": self.atoms.append(AcceptorExoA(atom_name, coords[0], coords[1], coords[2]))
+            case "N3": self.atoms.append(AcceptorEndoA(atom_name, coords[0], coords[1], coords[2]))
             case "O2": self.atoms.append(AcceptorExoA(atom_name, coords[0], coords[1], coords[2]))
             case _: self.atoms.append(Atom(atom_name, coords[0], coords[1], coords[2]))
 
