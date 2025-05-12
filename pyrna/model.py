@@ -227,6 +227,30 @@ class Atom:
         self.y = y
         self.z = z
 
+class EndocyclicA: 
+    def __init__(self, name, x, y, z):
+        Atom.__init__(self, name, x, y, z)
+
+class DonorEndoA: 
+    def __init__(self, name, x, y, z):
+        EndocyclicA.__init__(self, name, x, y, z)
+
+class AcceptorEndoA: 
+    def __init__(self, name, x, y, z):
+        EndocyclicA.__init__(self, name, x, y, z)
+
+class ExocyclicA: 
+    def __init__(self, name, x, y, z):
+        Atom.__init__(self, name, x, y, z)
+
+class DonnorExoA: 
+    def __init__(self, name, x, y, z):
+        ExocyclicA.__init__(self, name, x, y, z)
+
+class AcceptorExoA: 
+    def __init__(self, name, x, y, z):
+        ExocyclicA.__init__(self, name, x, y, z)
+ 
 class Residue3D:
     def __init__(self, residue_name):
         self.residue_name = residue_name
@@ -234,6 +258,28 @@ class Residue3D:
 
     def add_atom(self, atom_name, coords):
         self.atoms.append(Atom(atom_name, coords[0], coords[1], coords[2]))
+
+class Uracil3D(Residue3D):
+    def __init__(self):
+        Residue3D.__init__(self,'uracil')
+    def add_atom(self, atom_name, coords):
+        match atom_name: 
+            case "O2" : self.atoms.append(AcceptorExoA(atom_name, coords[0], coords[1], coords[2]))
+            case "N3" : self.atoms.append(DonorEndoA(atom_name, coords[0], coords[1], coords[2]))
+            case "O4" : self.atoms.append(AcceptorExoA(atom_name, coords[0], coords[1], coords[2]))
+            case _: self.atoms.append(Atom(atom_name, coords[0], coords[1], coords[2]))
+
+class Guanine3D(Residue3D):
+    def __init__(self):
+        Residue3D.__init__(self,'guanine')
+    def add_atom(self, atom_name, coords):
+        match atom_name:    
+            case "N1": self.atoms.append(DonorEndoA(atom_name, coords[0], coords[1], coords[2]))
+            case "N2": self.atoms.append(DonorExoA(atom name, coords[0], coords[1], coords[2]))
+            case "N3": self.atoms.append(AcceptorEndoA(atom_name, coords[0], coords[1], coords[2]))
+            case "06": self.atoms.append(AcceptorExoA(atom_name, coords[0], coords[1], coords[2]))
+            case "N7": self.atoms.append(AcceptorEndoA(atom_name, coords[0], coords[1], coords[2]))
+            case _: self.atoms.append(Atom(atom_name, coords[0], coords[1], coords[2]))
 
 class TertiaryStructure:
 
