@@ -261,7 +261,7 @@ class Residue3D:
 
 class Uracil3D(Residue3D):
     def __init__(self):
-        Residue3D.__init__(self,'uracil')
+        Residue3D.__init__(self)
     def add_atom(self, atom_name, coords):
         match atom_name: 
             case "O2" : self.atoms.append(AcceptorExoA(atom_name, coords[0], coords[1], coords[2]))
@@ -271,7 +271,7 @@ class Uracil3D(Residue3D):
 
 class Guanine3D(Residue3D):
     def __init__(self):
-        Residue3D.__init__(self,'guanine')
+        Residue3D.__init__(self)
     def add_atom(self, atom_name, coords):
         match atom_name:    
             case "N1": self.atoms.append(DonorEndoA(atom_name, coords[0], coords[1], coords[2]))
@@ -297,8 +297,12 @@ class TertiaryStructure:
             atom_name = 'O3P'
         if absolute_position-1 >= len(self.residues):
             self.rna.add_residue(residue_name)
-            self.residues.append(Residue3D(residue_name))
-            
+            match(residue_name):
+                case "A": self.residues.append(Adenine3D)
+                case "G": self.residues.append(Guanine3D)
+                case "U": self.residues.append(Uracil3D)
+                case "C": self.residues.append(Cytosine3D)
+                case _: raise RuntimeError("Unknown residue "+residue_name)
         self.residues[absolute_position-1].add_atom(atom_name,coords)
             
 modified_ribonucleotides = {
