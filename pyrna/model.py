@@ -267,13 +267,10 @@ class Uracil3D(Residue3D):
             case "N3" : self.atoms.append(DonorEndoA(atom_name, coords[0], coords[1], coords[2]))
             case "O4" : self.atoms.append(AcceptorExoA(atom_name, coords[0], coords[1], coords[2]))
             case _: self.atoms.append(Atom(atom_name, coords[0], coords[1], coords[2]))
-    def __str__(self):
-        return 'U'
 
 class Guanine3D(Residue3D):
     def __init__(self):
         Residue3D.__init__(self)
-
     def add_atom(self, atom_name, coords):
         match atom_name:    
             case "N1": self.atoms.append(DonorEndoA(atom_name, coords[0], coords[1], coords[2]))
@@ -284,10 +281,20 @@ class Guanine3D(Residue3D):
             case _: self.atoms.append(Atom(atom_name, coords[0], coords[1], coords[2]))
 
 class Adenine3D(Residue3D):
-    pass
+    def __init__(self):
+        Residue3D.__init__(self)
+    def add_atom(self, atom_name, coords):
+        match atom_name:
 
 class Cytosine3D(Residue3D):
-    pass
+    def __init__(self):
+        Residue3D.__init__(self)
+    def add_atom(self, atom_name, coords):
+        match atom_name:
+            case "N4": self.atoms.append(DonorExoA(atom_name, coords[0], coords[1], coords[2]))
+            case "N3": self.atoms.append(AcceptorExoA(atom_name, coords[0], coords[1], coords[2]))
+            case "O2": self.atoms.append(AcceptorExoA(atom_name, coords[0], coords[1], coords[2]))
+            case _: self.atoms.append(Atom(atom_name, coords[0], coords[1], coords[2]))
 
 class TertiaryStructure:
     def __init__(self, rna):
